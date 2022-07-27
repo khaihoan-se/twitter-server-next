@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser'
 
 import authRouter from './router/authRouter'
 import postRouter from './router/postRouter'
+import userRouter from './router/userRouter'
+
 dotenv.config()
 
 const app: Application = express()
@@ -32,6 +34,7 @@ const URI = process.env.MONGODB_URL || '';
 
 app.use('/api', authRouter)
 app.use('/api', postRouter)
+app.use('/api', userRouter)
 
 
 app.listen(POST, () => {

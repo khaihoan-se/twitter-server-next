@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     banner: {
         type: String,
+        required: true,
     },
     birthday: { 
         type: Date 
