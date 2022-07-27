@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 
 import authRouter from './router/authRouter'
-
+import postRouter from './router/postRouter'
 dotenv.config()
 
 const app: Application = express()
@@ -31,6 +31,8 @@ const URI = process.env.MONGODB_URL || '';
 })()
 
 app.use('/api', authRouter)
+app.use('/api', postRouter)
+
 
 app.listen(POST, () => {
   console.log('Server is running on port 5000')

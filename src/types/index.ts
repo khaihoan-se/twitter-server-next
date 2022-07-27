@@ -1,3 +1,4 @@
+import { Request } from 'express'
 export interface IUser {
     fullname: string;
     username: string;
@@ -9,7 +10,12 @@ export interface IUser {
     bio: string;
     location: string;
     website: string;
-    followers: string[];
-    following: string[];
-    saved: string[];
+    statusPost: string;
+    followers: string;
+    following: string;
+    saved: string;
+    _id: string;
+}
+export interface IPost extends Request {
+    user: IUser
 }

@@ -47,6 +47,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         maxlength: 25
     },
+    statusPost: {
+        type: String,
+        default: '1'
+    },
     followers: [{type: mongoose.Types.ObjectId, ref: 'user'}],
     following: [{type: mongoose.Types.ObjectId, ref: 'user'}],
     saved: [{type: mongoose.Types.ObjectId, ref: 'user'}]
