@@ -8,6 +8,8 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
 dotenv.config()
+
+
 const REFRESH_TOKEN_SECRET: string = process.env.REFRESH_TOKEN_SECRET || '';
 
 const authCtrl = {

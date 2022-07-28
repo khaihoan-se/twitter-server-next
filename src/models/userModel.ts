@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 25,
+        maxlength: 50,
         unique: true
     },
     email: {
@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     banner: {
         type: String,
-        required: true,
+        required: false,
     },
     birthday: { 
         type: Date 
