@@ -3,6 +3,8 @@ import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
+import path from 'path'
 
 import authRouter from './router/authRouter'
 import postRouter from './router/postRouter'
@@ -11,6 +13,8 @@ import userRouter from './router/userRouter'
 dotenv.config()
 
 const app: Application = express()
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
@@ -19,6 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // app.use(express.static('public'))
 app.use('/images', express.static('images'))
+app.use('/uploads', express.static('uploads'));
 
 const POST = process.env.PORT || 5000;
 const URI = process.env.MONGODB_URL || '';
