@@ -1,7 +1,6 @@
 import Posts from '../models/postModel'
-import { Response, Request, NextFunction } from 'express'
+import { Response } from 'express'
 import { IPost } from '../types'
-// import imageModel from '../models/imageModel'
 import { fileSizeFormatter } from '../utils'
 
 const postCtrl = {
@@ -18,7 +17,7 @@ const postCtrl = {
             imageArray.push(file)
         })
         if(imageArray.length > 4) return res.status(400).json({msg: "You can only upload up to 4 images."})
-        
+
         const newPost: any = new Posts({
             description: req.body.description,
             images: imageArray,
@@ -27,9 +26,8 @@ const postCtrl = {
             comments: [],
             user: req.body.user
         })
-        // console.log(req.body)
-        await newPost.save();
 
+        await newPost.save();
         res.json({
             msg: 'Created Post!',
             newPost: {
