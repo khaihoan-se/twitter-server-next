@@ -1,10 +1,22 @@
 import mongoose from 'mongoose'
 
 const postSchema = new mongoose.Schema({
-    description: {
-        type: Array,
-        required: true
-    },
+    // description: {
+    //     type: Array,
+    //     default: []
+    // },
+    description: [
+        { 
+            key: {
+                type: String,
+                default: ''
+            }, 
+            text: {
+                type: String,
+                default: ''
+            } 
+        }
+    ],
     // description: [Object],
     images: [Object],
     status: {
