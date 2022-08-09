@@ -6,6 +6,7 @@ import { validateEmail, validatePassword, createAccessToken, createRefreshToken 
 import { generateFromEmail } from 'unique-username-generator'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import cookie from 'cookie'
 
 dotenv.config()
 
@@ -64,10 +65,10 @@ const authCtrl = {
             const user = await Users.findOne({email})
                 .populate("followers following", "avatar username fullname followers following")
             
-            if(!user) return res.status(400).json({msg: "This email does not exist."})
+            if(!user) return res.status(400).json({message: "This email does not exist."})
     
             const isMatch = await bcrypt.compare(password, user.password)
-            if(!isMatch) return res.status(400).json({msg: "Wrong password."})
+            if(!isMatch) return res.status(400).json({message: "Wrong password."})
     
             const access_token = createAccessToken({id: user._id})
             const refresh_token = createRefreshToken({id: user._id})
@@ -77,16 +78,24 @@ const authCtrl = {
                 path: '/api/refresh_token',
                 maxAge: 30*24*60*60*1000 // 30days
             })
-    
+            
             res.json({
                 message: 'Login Success!',
                 access_token,
-                data: {
-                    user,
-                    password: ''
-                }
             })
         } catch (err: any) {
+            return res.status(500).json({message: err.message})
+        }
+    },
+    getUserInfor: async (req: any, res: Response) => {
+        try {
+            const user = await Users.findById(req.user.id).select('-password')
+
+            res.json({
+                user: user,
+                islogin: true
+            })
+        } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
