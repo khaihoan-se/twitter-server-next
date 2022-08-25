@@ -75,7 +75,9 @@ const postCtrl = {
                 user: req.body.user
             })
             // save the new post to the database.
-            await newPost.save();
+            // await newPost.save();
+            console.log(req);
+            
             // return the new post to the client.
             res.json({
                 msg: 'Created Post!',
