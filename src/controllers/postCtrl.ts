@@ -23,18 +23,21 @@ class APIfeatures {
 const postCtrl = {
     createPost: async (req: IPost, res: Response) => {
         try {
-
             const imageArray = []
             const fileArray: any = req.files
             if(fileArray.length > 0) {
                 fileArray.forEach((element: any) => {
-                    const file = {
-                        fileName: element.originalname,
-                        filePath: element.path,
-                        fileType: element.mimetype,
-                        fileSize: fileSizeFormatter(element.size, 2)
+                    if(element.mimetype === 'video/mp4' && fileArray.length > 1) {
+                        return res.status(400).json({msg: "You can only upload up to 1 video."})
+                    } else {
+                        const file = {
+                            fileName: element.originalname,
+                            filePath: element.path,
+                            fileType: element.mimetype,
+                            fileSize: fileSizeFormatter(element.size, 2)
+                        }
+                        imageArray.push(file)
                     }
-                    imageArray.push(file)
                 })
             }
             // check the number of images
@@ -75,9 +78,7 @@ const postCtrl = {
                 user: req.body.user
             })
             // save the new post to the database.
-            // await newPost.save();
-            console.log(req);
-            
+            await newPost.save();
             // return the new post to the client.
             res.json({
                 msg: 'Created Post!',
