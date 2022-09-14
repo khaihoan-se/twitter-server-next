@@ -13,7 +13,7 @@ class APIfeatures {
 
     paginating() {
         const page = this.queryString.page * 1 || 1
-        const limit = this.queryString.limit * 1 || 5
+        const limit = this.queryString.limit * 1
         const skip = (page - 1) * limit
         this.query = this.query.skip(skip).limit(limit)
         return this
@@ -75,7 +75,7 @@ const postCtrl = {
                 description: descriptionArray,
                 images: imageArray,
                 status: req.body.status,
-                user: req.body.user
+                user: req.user._id
             })
             // save the new post to the database.
             await newPost.save();
@@ -97,6 +97,13 @@ const postCtrl = {
 
             const posts = await features.query.sort('-createdAt')
             .populate("user likes", "avatar username fullname followers")
+            // .populate({
+            //     path: "comments",
+            //     populate: {
+            //         path: "user likes",
+            //         select: "-password"
+            //     }
+            // })
 
             res.json({
                 msg: 'Success!',

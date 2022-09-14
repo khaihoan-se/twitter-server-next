@@ -29,7 +29,7 @@ const userCtrl = {
         try {
             const { fullname, username, avatar, banner, birthday, website, statusPost, bio, location } = req.body
 
-            if(!fullname) return res.status(400).json({msg: "Please add your full name."})
+            // if(!fullname) return res.status(400).json({msg: "Please add your full name."})
 
             const newUserName = !username ? username : username.toLowerCase().replace(/ /g, '')
             const user_name = await Users.findOne({username: newUserName})
