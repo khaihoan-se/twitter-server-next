@@ -4,7 +4,6 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import path from 'path'
 
 import authRouter from './router/authRouter'
 import postRouter from './router/postRouter'
