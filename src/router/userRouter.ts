@@ -1,6 +1,7 @@
 import express from 'express';
 import auth from '../middleware/auth';
 import userCtrl from '../controllers/userCtrl';
+import upload from '../middleware/upload'
 
 const router = express.Router();
 
@@ -15,5 +16,7 @@ router.patch('/user/:id/unfollow', auth, userCtrl.unfollow) // unfollow user
 
 router.get('/suggestionsUser', auth, userCtrl.suggestionsUser)  // get suggestions user
 
+
+router.post('/user/signup', upload.single('avatar'), userCtrl.signup)
 
 export default router;

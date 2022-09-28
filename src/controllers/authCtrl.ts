@@ -1,4 +1,4 @@
-import { IUser } from './../types/index';
+// import { IUser } from './../types/index';
 import { Request, Response } from 'express'
 import Users from '../models/userModel'
 import bcrypt from 'bcrypt'
@@ -6,7 +6,7 @@ import { validateEmail, validatePassword, createAccessToken, createRefreshToken 
 import { generateFromEmail } from 'unique-username-generator'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
-import cookie from 'cookie'
+// import cookie from 'cookie'
 
 dotenv.config()
 

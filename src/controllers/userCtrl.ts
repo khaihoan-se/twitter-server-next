@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import Users from '../models/userModel'
 import { IPost } from '../types'
 
@@ -103,6 +103,15 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+
+    // Test User new controllers tag: https://github.com/eknoorpreet/dev.to-clone/blob/main/server/controllers/users.js
+
+    signup: async (req: Request, res: Response, next: any) => {
+        const { fullname, email } = req.body
+        const avatar = req.file
+            
+        console.log(fullname, email, avatar)
+    }
 }
 
 export default userCtrl
